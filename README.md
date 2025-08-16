@@ -10,6 +10,21 @@
 
 O **Assistente de Voz XPTO** é uma simulação completa de assistente virtual voltado para **busca e filtragem** em e-commerce, utilizando **VUI (Voice User Interface)**. O sistema permite que usuários realizem pesquisas através de comandos de voz, facilitando o acesso a informações de forma **acessível e eficiente**.
 
+## Vídeo Demonstração
+
+*Inserir aqui*.
+
+## 👥 Integrantes
+
+- <a href="https://www.linkedin.com/in/lucas-nunes-matheus/">Lucas Matheus Nunes</a>
+- <a href="https://www.linkedin.com/in/vinicius-maciel-flor/">Vinicius Maciel Flor</a>
+- <a href="https://www.linkedin.com/in/iasmim-/">Iasmim Jesus</a>
+- <a href="https://www.linkedin.com/in/thalyta-viana/">Thalyta Viana</a>
+- <a href="https://www.linkedin.com/in/renan-reis1907/">Renan Reis</a>
+- <a href="https://www.linkedin.com/in/gabriel-nascimento3/">Gabriel Nascimento</a>
+- <a href="https://www.linkedin.com/in/viniciussavian/">Vinicius Savian</a>
+- <a href="https://www.linkedin.com/in/giacomo-zema-matizonkas-7ab9072b2/?originalSubdomain=br">Giacomo Zema</a>
+
 ### 🎯 Objetivo Principal
 Desenvolver uma interface de voz que permita aos usuários:
 - Buscar produtos por comandos naturais
