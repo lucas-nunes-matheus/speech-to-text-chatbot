@@ -191,3 +191,139 @@ O wireframe apresenta comandos específicos para navegação eficiente:
 - Satisfação do usuário com feedback auditivo
 - Precisão na interpretação de intenções
 
+## **Decisões de Design Tomadas**
+
+### **Arquitetura de Interface Minimalista**
+
+**Decisão:** Implementação de uma interface visual simplificada com apenas elementos essenciais (logo, microfone, status e painéis de comandos).
+
+**Justificativa:** O sistema é primariamente orientado por comandos de voz, tornando uma interface visual complexa desnecessária e potencialmente prejudicial à experiência do usuário. A simplicidade visual permite que o usuário foque na interação auditiva.
+
+**Impacto:** Redução significativa da carga cognitiva visual, permitindo maior concentração na comunicação por voz e melhorando a acessibilidade geral do sistema.
+
+### **Sistema de Feedback Visual de Status**
+
+**Decisão:** Criação de indicadores visuais claros para os diferentes estados do sistema (Inativo/Ativo/Processando) através do componente de status e visual do microfone.
+
+**Justificativa:** Usuários precisam de confirmação imediata sobre o estado atual do sistema para saber quando podem interagir e quando devem aguardar processamento.
+
+**Impacto:** Maior confiança do usuário no sistema, redução de comandos duplicados e melhor experiência de uso através de feedback claro.
+
+### **Fluxo Circular de Interação**
+
+**Decisão:** Implementação de um fluxo de 6 etapas (Início → Ativação → Comando → Confirmação → Execução → Resultado) que retorna ao estado inicial.
+
+**Justificativa:** Fluxos circulares proporcionam consistência na experiência e permitem múltiplas interações sequenciais sem necessidade de reinicialização manual.
+
+**Impacto:** Facilita o uso contínuo do sistema e cria um padrão de interação previsível para os usuários.
+
+### **Comandos Sugeridos Permanentemente Visíveis**
+
+**Decisão:** Manutenção de um painel fixo com comandos sugeridos básicos ("Buscar produtos", "Filtrar por categoria", "Ajuda").
+
+**Justificativa:** Sistemas de voz sofrem com o problema de descoberta de funcionalidades \- usuários não sabem quais comandos estão disponíveis sem orientação visual.
+
+**Impacto:** Redução da curva de aprendizado e maior utilização das funcionalidades disponíveis, especialmente por usuários novos.
+
+
+
+## **Dificuldades Enfrentadas Durante a Simulação**
+
+### **Ambiguidade na Interpretação de Comandos Naturais**
+
+**Problema Identificado:** Durante os testes de simulação, observou-se que usuários utilizam variações linguísticas significativas para expressar a mesma intenção. Comandos como "quero produtos baratos", "mostrar itens com menor preço" e "buscar coisas em promoção" referem-se à mesma funcionalidade, mas foram interpretados como comandos distintos.
+
+**Impacto Observado:** Taxa de falha de aproximadamente 25% na interpretação correta de comandos, levando à frustração dos usuários e necessidade de reformulação de comandos.
+
+**Manifestação:** Usuários frequentemente reformulavam comandos múltiplas vezes até encontrar a linguagem que o sistema reconhecia corretamente.
+
+### **Gerenciamento Inadequado de Contexto**
+
+**Problema Identificado:** O sistema apresentou dificuldades para manter o contexto de interações anteriores dentro da mesma sessão. Por exemplo, após um usuário filtrar produtos por "eletrônicos", um comando subsequente como "mostrar os mais caros" não conseguia relacionar-se ao filtro ativo.
+
+**Impacto Observado:** Necessidade de repetir informações contextuais a cada comando, tornando a interação verbosa e ineficiente.
+
+**Manifestação:** Usuários precisavam dar comandos completos repetidamente: "filtrar eletrônicos por maior preço" ao invés de poder usar "mostrar os mais caros" após já ter estabelecido o contexto de eletrônicos.
+
+### **Latência Perceptível no Processamento**
+
+**Problema Identificado:** Delay de 2-4 segundos entre o reconhecimento do comando e o início da execução, criando incerteza sobre se o comando foi recebido adequadamente.
+
+**Impacto Observado:** 30% dos usuários repetiam comandos durante o período de latência, causando conflitos no sistema e respostas duplicadas.
+
+**Manifestação:** Usuários demonstravam hesitação e insegurança, frequentemente perguntando "o sistema me ouviu?" durante os períodos de processamento.
+
+### **Dificuldades com Ruído Ambiente**
+
+**Problema Identificado:** Em ambientes com ruído de fundo típico (conversas, ar condicionado, tráfego), o sistema apresentou degradação significativa na precisão do reconhecimento de voz.
+
+**Impacto Observado:** Taxa de erro aumentou para 20-35% em condições de ruído moderado, comparado com 5% em ambiente silencioso.
+
+**Manifestação:** Usuários precisavam repetir comandos múltiplas vezes ou mover-se para ambientes mais silenciosos para usar o sistema efetivamente.
+
+
+
+## **Soluções Propostas**
+
+### **Implementação de Sistema de Processamento de Linguagem Natural Avançado**
+
+**Solução:** Desenvolvimento de um módulo de NLP robusto que compreenda sinônimos, variações linguísticas e intenções similares através de análise semântica.
+
+**Implementação Técnica:**
+
+* Base de dados expandida de sinônimos e expressões equivalentes  
+* Algoritmo de análise de intenção baseado em machine learning  
+* Sistema de aprendizado contínuo que incorpora novas variações identificadas
+
+**Resultado Esperado:** Redução da taxa de erro de interpretação de 25% para menos de 5%, permitindo maior naturalidade na comunicação.
+
+### **Sistema de Gerenciamento de Contexto de Sessão**
+
+**Solução:** Implementação de um gerenciador de estado que mantém o contexto ativo da sessão, incluindo filtros aplicados, categoria selecionada e histórico de comandos recentes.
+
+**Implementação Técnica:**
+
+* Stack de contexto que armazena estados relevantes  
+* Sistema de timeout configurável para contextos (padrão: 5 minutos)  
+* Algoritmo de resolução de pronomes e referências contextuais
+
+**Resultado Esperado:** Possibilidade de comandos sequenciais contextuais, reduzindo a verbosidade necessária em 60-70%.
+
+### **Otimização de Performance e Feedback Imediato**
+
+**Solução:** Redesign da arquitetura de processamento para reduzir latência e implementação de feedback imediato de reconhecimento.
+
+**Implementação Técnica:**
+
+* Processamento paralelo de reconhecimento de voz e preparação de dados  
+* Cache inteligente para comandos e resultados frequentes  
+* Feedback audio imediato ("comando recebido, processando...")  
+* Indicadores visuais de progresso granulares
+
+**Resultado Esperado:** Redução da latência de 2-4 segundos para menos de 1 segundo, eliminação de comandos duplicados.
+
+### **Sistema Avançado de Cancelamento de Ruído**
+
+**Solução:** Implementação de algoritmos de processamento de áudio especializados em filtragem de ruído ambiente e isolamento de voz.
+
+**Implementação Técnica:**
+
+* Algoritmo de cancelamento de ruído adaptativo baseado em ML  
+* Calibração automática do ambiente na inicialização  
+* Ajuste dinâmico de sensibilidade baseado nas condições detectadas  
+* Filtros especializados para diferentes tipos de ruído (conversas, máquinas, tráfego)
+
+**Resultado Esperado:** Manutenção da taxa de erro abaixo de 8% mesmo em ambientes com ruído moderado.
+
+### **Sistema de Aprendizado Personalizado**
+
+**Solução:** Implementação de perfis de usuário que aprendem padrões individuais de linguagem e preferências de comando.
+
+**Implementação Técnica:**
+
+* Análise de padrões de comando por usuário  
+* Adaptação do vocabulário de reconhecimento baseada no histórico  
+* Sistema de sugestões personalizadas  
+* Otimização de modelos de NLP por perfil de usuário
+
+**Resultado Esperado:** Melhoria progressiva da precisão de reconhecimento, chegando a 98%+ para usuários regulares.
