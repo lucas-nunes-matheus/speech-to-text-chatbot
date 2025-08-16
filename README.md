@@ -96,11 +96,18 @@ node server.js
 speech-to-text/
 │
 ├── server.js          # Servidor e lógica de transcrição
-├── README.md          # Documentação
-│
+├── README.md          # Documentação principal
+├── docs/              
+│   ├── documentacao.md  # Documentação técnica do wireframe 
+│   └── img/
+│       └── wireframe.png           # Wireframe da VUI
 └── public/
     └── index.html     # Interface principal
 ```
+
+## 📋 Documentação Técnica
+
+- **[Wireframe da Interface de Voz](docs/documentacao.md)** - Design detalhado da VUI (Voice User Interface)
 
 ## 🛠️ Tecnologias Utilizadas
 
