@@ -12,7 +12,35 @@ O **Assistente de Voz XPTO** é uma simulação completa de assistente virtual v
 
 ## Vídeo Demonstração
 
-*Inserir aqui*.
+### **Teste da Interface de Voz**
+
+Para demonstrar o funcionamento prático da interface de voz, foi criado um vídeo de teste mostrando:
+
+- **Interação com o microfone**: Ativação e estados visuais
+- **Comandos de voz em ação**: Exemplos reais de uso
+- **Feedback auditivo**: Confirmações e respostas do sistema
+- **Navegação por voz**: Uso dos comandos de navegação
+- **Fluxo completo**: Da ativação até a apresentação de resultados
+
+**Vídeo de Demonstração:**
+
+[![Demonstração da Interface de Voz XPTO](docs/img/thumbnail-video.png)](docs/videos/VUIinterface.mp4)
+
+*Clique na imagem acima para assistir ao vídeo de demonstração da interface*
+
+**Ou acesse diretamente:**
+- **Arquivo**: [VUIinterface.mp4](docs/videos/VUIinterface.mp4)
+- **Localização**: `docs/videos/VUIinterface.mp4`
+
+### **Aspectos Demonstrados no Vídeo**
+
+1. **Ativação da Interface**: Como iniciar a interação por voz
+2. **Comandos Básicos**: "Buscar produtos", "Filtrar por categoria", "Ajuda"
+3. **Comandos de Navegação**: "Próximos resultados", "Nova busca", etc.
+4. **Feedback Visual**: Mudanças de estado do microfone
+5. **Feedback Auditivo**: Confirmações e repetições de filtros
+6. **Tratamento de Erros**: Como o sistema responde a comandos não reconhecidos
+
 
 ## 👥 Integrantes
 
@@ -100,7 +128,9 @@ speech-to-text/
 ├── docs/              
 │   ├── documentacao.md  # Documentação técnica do wireframe 
 │   └── img/
-│       └── wireframe.png           # Wireframe da VUI
+│       └── wireframe.png     # Wireframe da VUI
+│   └── videos/
+│       └── VUIinterface.mp4   # Vídeo da interface do sistema
 └── public/
     └── index.html     # Interface principal
 ```
