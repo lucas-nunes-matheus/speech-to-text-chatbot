@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente de Voz XPTO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .commands-list {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 30px;
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .commands-list h3 {
+            color: #333;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .commands-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .commands-list li {
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 12px;
+            position: relative;
+            padding-left: 45px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .commands-list li::before {
+            content: '🛍️';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+        }
+
+        .commands-list li:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+            color: #667eea;
+        }
+
+        .commands-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .categories-info {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .categories-info h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .category-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        #recordButton {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        #recordButton::before {
+            content: '🎤';
+            margin-right: 10px;
+            font-size: 1.1em;
+        }
+
+        #recordButton::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+        }
+
+        #recordButton:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        #recordButton:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        #recordButton:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        #status {
+            margin-top: 20px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #userText {
+            margin-top: 20px;
+            font-weight: bold;
+            color: white;
+            font-size: 1.1em;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #botResponse {
+            margin-top: 20px;
+            padding: 25px 30px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        #botResponse::before {
+            content: '🤖';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-item {
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .product-promo {
+            border-left-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.05);
+        }
+
+        .product-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .product-details {
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .promo-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        /* Animações para estados de gravação */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .recording {
+            animation: pulse 1.5s infinite;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important;
+        }
+
+        .recording::before {
+            content: '⏹️';
+        }
+
+        /* Animação de fade-in */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+
+            .commands-list {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .commands-list h3 {
+                font-size: 1.2em;
+            }
+
+            .commands-list li {
+                font-size: 1em;
+                padding: 10px 12px;
+                padding-left: 40px;
+            }
+
+            #recordButton {
+                padding: 15px 30px;
+                font-size: 1.1em;
+            }
+
+            #botResponse, #userText {
+                padding: 20px;
+                font-size: 1em;
+            }
+
+            .categories {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .commands-list {
+                margin: 0 10px 20px;
+            }
+
+            #recordButton {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Assistente de Voz XPTO</h1>
+    
+    <div class="commands-list">
+        <h3>Comandos que você pode usar:</h3>
+        <ul>
+            <li>Listar **todos os produtos**</li>
+            <li>Verificar **estoque** de um produto</li>
+            <li>Mostrar produtos por **categoria**</li>
+            <li>Ver produtos em **promoção**</li>
+        </ul>
+    </div>
+
+    <div class="categories-info">
+        <h4>Categorias disponíveis:</h4>
+        <div class="categories">
+            <div class="category-tag">📱 Eletrônicos</div>
+            <div class="category-tag">👕 Roupas</div>
+            <div class="category-tag">📚 Livros</div>
+        </div>
+    </div>
+
+    <button id="recordButton">Pressione e Fale</button>
+    <p id="status">Pressione o botão para começar a falar.</p>
+    <p id="userText"></p>
+    <div id="botResponse"></div>
+
+    <script>
+        // Base de dados dos produtos
+        const produtos = [
+            { id: 1, nome: "Smartphone Galaxy", categoria: "Eletrônicos", preco: 899.99, precoOriginal: 1199.99, estoque: 15, promocao: true },
+            { id: 2, nome: "Notebook Dell", categoria: "Eletrônicos", preco: 2499.99, precoOriginal: null, estoque: 8, promocao: false },
+            { id: 3, nome: "Camiseta Polo", categoria: "Roupas", preco: 49.90, precoOriginal: 89.90, estoque: 25, promocao: true },
+            { id: 4, nome: "Calça Jeans", categoria: "Roupas", preco: 129.99, precoOriginal: null, estoque: 12, promocao: false },
+            { id: 5, nome: "Livro JavaScript", categoria: "Livros", preco: 79.90, precoOriginal: null, estoque: 30, promocao: false },
+            { id: 6, nome: "Livro Python", categoria: "Livros", preco: 89.90, precoOriginal: null, estoque: 0, promocao: false }
+        ];
+
+        const recordButton = document.getElementById('recordButton');
+        const status = document.getElementById('status');
+        const userTextDisplay = document.getElementById('userText');
+        const botResponseDisplay = document.getElementById('botResponse');
+        
+        function formatarProduto(produto) {
+            const precoStr = produto.promocao 
+                ? `R$ ${produto.preco.toFixed(2)} (era R$ ${produto.precoOriginal.toFixed(2)})`
+                : `R$ ${produto.preco.toFixed(2)}`;
+            const estoqueStr = produto.estoque > 0 ? `${produto.estoque} unidades` : 'Fora de estoque';
+            const promoStr = produto.promocao ? ' 🔥' : '';
+            
+            return `
+                <div class="product-item ${produto.promocao ? 'product-promo' : ''}">
+                    <div class="product-name">${produto.nome}${promoStr}${produto.promocao ? '<span class="promo-badge">PROMOÇÃO</span>' : ''}</div>
+                    <div class="product-details">
+                        Categoria: ${produto.categoria} | Preço: ${precoStr} | Estoque: ${estoqueStr}
+                    </div>
+                </div>
+            `;
+        }
+
+        function processarComando(texto) {
+            const textoLower = texto.toLowerCase();
+            
+            // Saudações
+            if (['oi', 'olá', 'ola', 'bom dia', 'boa tarde', 'boa noite'].some(s => textoLower.includes(s))) {
+                return 'Olá! Bem-vindo ao assistente XPTO. Posso ajudá-lo com informações sobre produtos, estoques, categorias e promoções. O que você gostaria de saber?';
+            }
+            
+            // Despedidas
+            if (['obrigado', 'obrigada', 'valeu', 'tchau', 'até logo'].some(s => textoLower.includes(s))) {
+                return 'De nada! Foi um prazer ajudá-lo. Até logo e volte sempre!';
+            }
+            
+            // Listar todos os produtos
+            if (['listar produtos', 'todos os produtos', 'mostrar produtos', 'ver produtos'].some(s => textoLower.includes(s))) {
+                let html = '<strong>📋 Todos os produtos disponíveis:</strong><br><br>';
+                produtos.forEach(produto => {
+                    html += formatarProduto(produto);
+                });
+                return html;
+            }
+            
+            // Verificar estoque de produto específico
+            if (textoLower.includes('estoque')) {
+                for (let produto of produtos) {
+                    if (textoLower.includes(produto.nome.toLowerCase())) {
+                        const estoqueInfo = produto.estoque > 0 
+                            ? `${produto.estoque} unidades disponíveis`
+                            : 'Produto fora de estoque';
+                        return `<strong>📦 Estoque do ${produto.nome}:</strong><br><br>${formatarProduto(produto)}`;
+                    }
+                }
+                return 'Por favor, me diga qual produto você quer verificar o estoque. Nossos produtos são: ' + 
+                       produtos.map(p => p.nome).join(', ');
+            }
+            
+            // Produtos por categoria
+            const categorias = ['eletrônicos', 'roupas', 'livros'];
+            for (let categoria of categorias) {
+                if (textoLower.includes(categoria)) {
+                    const produtosCategoria = produtos.filter(p => p.categoria.toLowerCase() === categoria);
+                    let html = `<strong>📂 Produtos da categoria ${categoria.charAt(0).toUpperCase() + categoria.slice(1)}:</strong><br><br>`;
+                    produtosCategoria.forEach(produto => {
+                        html += formatarProduto(produto);
+                    });
+                    return html;
+                }
+            }
+            
+            // Produtos em promoção
+            if (['promoção', 'promocao', 'oferta', 'desconto'].some(s => textoLower.includes(s))) {
+                const promocoes = produtos.filter(p => p.promocao);
+                let html = '<strong>🔥 Produtos em promoção:</strong><br><br>';
+                if (promocoes.length > 0) {
+                    promocoes.forEach(produto => {
+                        html += formatarProduto(produto);
+                    });
+                } else {
+                    html = 'No momento não temos produtos em promoção.';
+                }
+                return html;
+            }
+            
+            // Comando não reconhecido
+            return 'Desculpe, não entendi seu comando. Você pode: listar produtos, verificar estoque, ver por categoria (Eletrônicos, Roupas, Livros) ou ver promoções.';
+        }
+        
+        // Verifica se a Web Speech API de reconhecimento está disponível
+        if (!('webkitSpeechRecognition' in window)) {
+            status.textContent = 'Desculpe, seu navegador não suporta a Web Speech API de reconhecimento.';
+        } else {
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.lang = 'pt-BR';
+            
+            // Verificação e configuração da síntese de fala
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance();
+            utterance.lang = 'pt-BR';
+
+            if (!synth) {
+                console.error('A API de síntese de fala não está disponível neste navegador.');
+            }
+
+            recordButton.addEventListener('click', () => {
+                recognition.start();
+                status.textContent = 'Ouvindo...';
+                userTextDisplay.textContent = '';
+                botResponseDisplay.innerHTML = '';
+            });
+
+            recognition.onresult = (event) => {
+                const speechResult = event.results[0][0].transcript;
+                userTextDisplay.textContent = `Você disse: "${speechResult}"`;
+                status.textContent = 'Processando...';
+                
+                // Processar comando localmente
+                const resposta = processarComando(speechResult);
+                botResponseDisplay.innerHTML = resposta;
+                status.textContent = 'Pronto!';
+                
+                // Fazer o bot falar (apenas texto, sem HTML)
+                if (synth) {
+                    const textoParaFala = resposta.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+                    utterance.text = textoParaFala;
+                    synth.speak(utterance);
+                }
+            };
+
+            recognition.onerror = (event) => {
+                status.textContent = `Erro de reconhecimento de voz: ${event.error}`;
+            };
+
+            recognition.onend = () => {
+                if (status.textContent === 'Ouvindo...') {
+                    status.textContent = 'Gravação finalizada. Aguardando processamento...';
+                }
+            };
+        }
+    </script>
+</body>
+</html>
