@@ -10,38 +10,6 @@
 
 O **Assistente de Voz XPTO** é uma simulação completa de assistente virtual voltado para **busca e filtragem** em e-commerce, utilizando **VUI (Voice User Interface)**. O sistema permite que usuários realizem pesquisas através de comandos de voz, facilitando o acesso a informações de forma **acessível e eficiente**.
 
-## Vídeo Demonstração
-
-### **Teste da Interface de Voz**
-
-Para demonstrar o funcionamento prático da interface de voz, foi criado um vídeo de teste mostrando:
-
-- **Interação com o microfone**: Ativação e estados visuais
-- **Comandos de voz em ação**: Exemplos reais de uso
-- **Feedback auditivo**: Confirmações e respostas do sistema
-- **Navegação por voz**: Uso dos comandos de navegação
-- **Fluxo completo**: Da ativação até a apresentação de resultados
-
-**Vídeo de Demonstração:**
-
-[![Demonstração da Interface de Voz XPTO](docs/img/thumbnail-video.png)](docs/videos/VUIinterface.mp4)
-
-*Clique na imagem acima para assistir ao vídeo de demonstração da interface*
-
-**Ou acesse diretamente:**
-- **Arquivo**: [VUIinterface.mp4](docs/videos/VUIinterface.mp4)
-- **Localização**: `docs/videos/VUIinterface.mp4`
-
-### **Aspectos Demonstrados no Vídeo**
-
-1. **Ativação da Interface**: Como iniciar a interação por voz
-2. **Comandos Básicos**: "Buscar produtos", "Filtrar por categoria", "Ajuda"
-3. **Comandos de Navegação**: "Próximos resultados", "Nova busca", etc.
-4. **Feedback Visual**: Mudanças de estado do microfone
-5. **Feedback Auditivo**: Confirmações e repetições de filtros
-6. **Tratamento de Erros**: Como o sistema responde a comandos não reconhecidos
-
-
 ## 👥 Integrantes
 
 - <a href="https://www.linkedin.com/in/lucas-nunes-matheus/">Lucas Matheus Nunes</a>
@@ -59,6 +27,38 @@ Desenvolver uma interface de voz que permita aos usuários:
 - Aplicar filtros por categoria, preço e disponibilidade
 - Receber feedback auditivo confirmando ações
 - Navegar de forma intuitiva usando apenas a voz
+
+## Vídeo Demonstração
+
+### **Teste da Interface de Voz**
+
+Para demonstrar o funcionamento prático da interface de voz, foi criado um vídeo de teste mostrando:
+
+- **Interação com o microfone**: Ativação e estados visuais
+- **Comandos de voz em ação**: Exemplos reais de uso
+- **Feedback auditivo**: Confirmações e respostas do sistema
+- **Navegação por voz**: Uso dos comandos de navegação
+- **Fluxo completo**: Da ativação até a apresentação de resultados
+
+**Vídeo de Demonstração:**
+
+[![Demonstração da Interface de Voz XPTO](https://img.youtube.com/vi/w7d2MXyxYGA/maxresdefault.jpg)](https://youtu.be/w7d2MXyxYGA)
+
+*Clique na imagem acima para assistir ao vídeo de demonstração da interface no YouTube*
+
+**Ou acesse diretamente:**
+- **YouTube**: [Interface de Voz XPTO - Demonstração](https://youtu.be/w7d2MXyxYGA)
+- **ID do vídeo**: `w7d2MXyxYGA`
+
+### **Aspectos Demonstrados no Vídeo**
+
+1. **Ativação da Interface**: Como iniciar a interação por voz
+2. **Comandos Básicos**: "Buscar produtos", "Filtrar por categoria", "Ajuda"
+3. **Comandos de Navegação**: "Próximos resultados", "Nova busca", etc.
+4. **Feedback Visual**: Mudanças de estado do microfone
+5. **Feedback Auditivo**: Confirmações e repetições de filtros
+6. **Tratamento de Erros**: Como o sistema responde a comandos não reconhecidos
+
 
 ## ✨ Funcionalidades
 
@@ -125,19 +125,18 @@ speech-to-text/
 │
 ├── server.js          # Servidor e lógica de transcrição
 ├── README.md          # Documentação principal
-├── docs/              
+├── docs/              # Documentação técnica
 │   ├── documentacao.md  # Documentação técnica do wireframe 
 │   └── img/
 │       └── wireframe.png     # Wireframe da VUI
-│   └── videos/
-│       └── VUIinterface.mp4   # Vídeo da interface do sistema
 └── public/
     └── index.html     # Interface principal
 ```
 
-## 📋 Documentação Técnica
+## 📋 Documentação e Recursos
 
 - **[Wireframe da Interface de Voz](docs/documentacao.md)** - Design detalhado da VUI (Voice User Interface)
+- **[Vídeo Demonstração](https://youtu.be/w7d2MXyxYGA)** - Funcionamento prático da interface de voz
 
 ## 🛠️ Tecnologias Utilizadas
 
