@@ -13,13 +13,6 @@ O **Assistente de Voz XPTO** é uma simulação completa de assistente virtual v
 ## 👥 Integrantes
 
 - <a href="https://www.linkedin.com/in/lucas-nunes-matheus/">Lucas Matheus Nunes</a>
-- <a href="https://www.linkedin.com/in/vinicius-maciel-flor/">Vinicius Maciel Flor</a>
-- <a href="https://www.linkedin.com/in/iasmim-/">Iasmim Jesus</a>
-- <a href="https://www.linkedin.com/in/thalyta-viana/">Thalyta Viana</a>
-- <a href="https://www.linkedin.com/in/renan-reis1907/">Renan Reis</a>
-- <a href="https://www.linkedin.com/in/gabriel-nascimento3/">Gabriel Nascimento</a>
-- <a href="https://www.linkedin.com/in/viniciussavian/">Vinicius Savian</a>
-- <a href="https://www.linkedin.com/in/giacomo-zema-matizonkas-7ab9072b2/?originalSubdomain=br">Giacomo Zema</a>
 
 ### 🎯 Objetivo Principal
 Desenvolver uma interface de voz que permita aos usuários:
